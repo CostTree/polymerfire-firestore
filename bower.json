@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
-    "polymerfire": "^2.0.0"
+    "polymerfire": "git@github.com:FirebaseExtended/polymerfire.git#f55ce320a6882c34ce7ce128720939bdc5f0eb0f"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^3.0.0",
