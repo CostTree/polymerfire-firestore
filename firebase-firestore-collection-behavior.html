@@ -142,6 +142,18 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
                 } else {
                     this.db.goOffline();
                 }
+            },
+
+            add: function (doc) {
+                return this.ref.add(doc);
+            },
+
+            set: function (docKey, data, options) {
+                return this.ref.doc(docKey).set(data, options);
+            },
+
+            update: function (docKey, data) {
+                return this.ref.doc(docKey).update(data);
             }
         };
 
