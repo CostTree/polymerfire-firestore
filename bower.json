@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "authors": [
     "Firebase",
+    "CostTree",
+    "eCivis",
     "Greg McClellan <gsmcclellan@gmail.com>"
   ],
   "description": "Polymer Web Components for Firebase Firestore",
