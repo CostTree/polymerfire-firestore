@@ -353,11 +353,6 @@ Polymer({
                 __queryChanged: function(query, oldQuery) {
                     var unsubscribe = this.get('_unsubscribe');
                     if (oldQuery) {
-//                        oldQuery.off('value', this.__onFirebaseValue, this);
-//                        oldQuery.off('child_added', this.__onFirebaseChildAdded, this);
-//                        oldQuery.off('child_removed', this.__onFirebaseChildRemoved, this);
-//                        oldQuery.off('child_changed', this.__onFirebaseChildChanged, this);
-//                        oldQuery.off('child_moved', this.__onFirebaseChildMoved, this);
                         unsubscribe();
 
                         this.syncToMemory(function() {
@@ -366,18 +361,8 @@ Polymer({
                         });
                     }
 
-                    // this allows us to just call the addition of event listeners only once.
-                    // __queryChanged is being called thrice when firebase-query is created
-                    // 1 - 2. query property computed (null, undefined)
-                    // 3. when attached is called (this.query, this.query)
-                    // need help to fix this so that this function is only called once
-
                     if (query) {
                         if(this._onOnce){ // remove handlers before adding again. Otherwise we get data multiplying
-//                            query.off('child_added', this.__onFirebaseChildAdded, this);
-//                            query.off('child_removed', this.__onFirebaseChildRemoved, this);
-//                            query.off('child_changed', this.__onFirebaseChildChanged, this);
-//                            query.off('child_moved', this.__onFirebaseChildMoved, this);
                         }
 
                         this._onOnce = true;
@@ -423,16 +408,8 @@ Polymer({
                     if (unsubscribe) {
                         unsubscribe();
                     }
-//                    query.off('child_added', this.__onFirebaseChildAdded, this);
-//                    query.off('child_removed', this.__onFirebaseChildRemoved, this);
-//                    query.off('child_changed', this.__onFirebaseChildChanged, this);
-//                    query.off('child_moved', this.__onFirebaseChildMoved, this);
 
                     this.set('_unsubscribe', query.onSnapshot(this.__onSnapshotUpdate.bind(this), this.__onError.bind(this)));
-//                    query.on('child_added', this.__onFirebaseChildAdded, this.__onError, this);
-//                    query.on('child_removed', this.__onFirebaseChildRemoved, this.__onError, this);
-//                    query.on('child_changed', this.__onFirebaseChildChanged, this.__onError, this);
-//                    query.on('child_moved', this.__onFirebaseChildMoved, this.__onError, this);
                 },
 
                 __onSnapshotUpdate: function (snapshot) {
