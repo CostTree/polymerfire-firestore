@@ -354,6 +354,8 @@ Polymer({
                     if (oldQuery) {
                         try {
                             this.get('_unsubscribe')();
+                        } catch (e) {
+                            // console.error(e);
                         }
 
                         this.syncToMemory(function() {
