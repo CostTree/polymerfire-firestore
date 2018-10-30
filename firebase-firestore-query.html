@@ -351,9 +351,10 @@ Polymer({
                 },
 
                 __queryChanged: function(query, oldQuery) {
-                    var unsubscribe = this.get('_unsubscribe');
                     if (oldQuery) {
-                        unsubscribe();
+                        try {
+                            this.get('_unsubscribe')();
+                        }
 
                         this.syncToMemory(function() {
                             this.__map = {};
