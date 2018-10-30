@@ -9,7 +9,7 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../app-storage/app-storage-behavior.html">
 <link rel="import" href="../polymerfire/firebase-common-behavior.html">
-<link rel="import" href="./firebase-firestore-script.html">
+<!--<link rel="import" href="./firebase-firestore-script.html">-->
 
 <script>
     (function() {
@@ -130,7 +130,10 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 
             __pathReady: function(path) {
                 if (!path) { return false; }
-                var pieces = path.split('/').slice(1);
+                var pieces = path.split('/');
+                if (!pieces[0].length) {
+                    pieces = pieces.slice(1);
+                }
                 return path && pieces.indexOf('') < 0 && pieces.length % 2 == 1;
             },
 
