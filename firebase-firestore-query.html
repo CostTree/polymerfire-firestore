@@ -553,6 +553,10 @@ Polymer({
                     var value = document.data();
 
                     return this.__valueWithKey(key, value);
+                },
+
+                reset: function () {
+                    this.attached();
                 }
             });
         })();
