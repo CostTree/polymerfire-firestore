@@ -10,23 +10,18 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 <link rel="import" href="../app-storage/app-storage-behavior.html">
 <link rel="import" href="../polymerfire/firebase-common-behavior.html">
 <!--<link rel="import" href="./firebase-firestore-script.html">-->
-
 <script>
     (function() {
         'use strict';
 
-        /** @polymerBehavior Polymer.FirebaseFirestoreCollectionBehavior */
-        Polymer.FirebaseFirestoreCollectionBehaviorImpl = {
+        /** @polymerBehavior Polymer.FirebaseFirestoreDocumentBehavior */
+        Polymer.FirebaseFirestoreDocumentBehaviorImpl = {
             properties: {
                 db: {
                     type: Object,
                     computed: '__computeDb(app)'
                 },
 
-                /**
-                 * [`firebase.firestore.Collection`](https://firebase.google.com/docs/reference/js/firebase.firestore.CollectionReference#properties)
-                 * object computed by the following parameters.
-                 */
                 ref: {
                     type: Object,
                     computed: '__computeRef(db, path, disabled)',
@@ -47,7 +42,6 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
                  * When true, Firebase listeners won't be activated. This can be useful
                  * in situations where elements are loaded into the DOM before they're
                  * ready to be activated (e.g. navigation, initialization scenarios).
-                 * @type {Boolean}
                  */
                 disabled: {
                     type: Boolean,
@@ -72,19 +66,19 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
              * Set the firebase value.
              * @return {!firebase.Promise<void>}
              */
-//            _setFirebaseValue: function(path, value) {
-//                this._log('Setting Firebase value at', path, 'to', value)
-//                var key = value && value.$key;
-//                var leaf = value && value.hasOwnProperty('$val');
-//                if (key) {
-//                    value.$key = null;
-//                }
-//                var result = this.db.ref(path).set(leaf ? value.$val : value);
-//                if (key) {
-//                    value.$key = key;
-//                }
-//                return result;
-//            },
+//      _setFirebaseValue: function(path, value) {
+//        this._log('Setting Firebase value at', path, 'to', value)
+//        var key = value && value.$key;
+//        var leaf = value && value.hasOwnProperty('$val');
+//        if (key) {
+//          value.$key = null;
+//        }
+//        var result = this.db.ref(path).set(leaf ? value.$val : value);
+//        if (key) {
+//          value.$key = key;
+//        }
+//        return result;
+//      },
 
             __computeDb: function(app) {
                 return app ? app.firestore() : null;
@@ -98,17 +92,7 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
                     return null;
                 }
 
-                return db.collection(path);
-            },
-
-            __parseQueryParams: function (stringParams) {
-                if (stringParams == null || typeof stringParams != 'string' || stringParams.length == 0) {
-                    return null;
-                }
-
-                return stringParams.split('&&').map(function (eachParam) {
-                    return eachParam.split(',');
-                })
+                return db.doc(path);
             },
 
             /**
@@ -134,7 +118,7 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
                 if (!pieces[0].length) {
                     pieces = pieces.slice(1);
                 }
-                return path && pieces.indexOf('') < 0 && pieces.length % 2 == 1;
+                return path && pieces.indexOf('') < 0 && pieces.length % 2 == 0;
             },
 
             __onlineChanged: function(online) {
@@ -149,24 +133,20 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
                 }
             },
 
-            addData: function (doc) {
-                return this.ref.add(doc);
+            setData: function (data, options) {
+                return this.ref.set(data, options);
             },
 
-            setData: function (docPath, data, options) {
-                return this.ref.doc(docPath).set(data, options);
-            },
-
-            updateData: function (docPath, data) {
-                return this.ref.doc(docPath).update(data);
+            updateData: function (data) {
+                return this.ref.update(data);
             }
         };
 
         /** @polymerBehavior */
-        Polymer.FirebaseFirestoreBehavior = [
+        Polymer.FirebaseFirestoreDocumentBehavior = [
             Polymer.AppStorageBehavior,
             Polymer.FirebaseCommonBehavior,
-            Polymer.FirebaseFirestoreCollectionBehaviorImpl
+            Polymer.FirebaseFirestoreDocumentBehaviorImpl
         ];
     })();
 </script>
