@@ -159,6 +159,10 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 
             updateData: function (docPath, data) {
                 return this.ref.doc(docPath).update(data);
+            },
+
+            removeData: function (docPath) {
+                return this.ref.doc(docPath).delete();
             }
         };
 
