@@ -44,8 +44,8 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
     },
 
     detached: function() {
-      if (this.ref) {
-        this.ref.off('value', this.__onFirebaseValue, this);
+      if (this._unsubscribe) {
+        this._unsubscribe();
       }
     },
 
