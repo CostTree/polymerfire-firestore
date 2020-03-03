@@ -7,45 +7,47 @@ export const FirebaseFirestoreDocumentMixin = (superClass) => class extends supe
   }
 
   static get properties() {
-      db: {
-          type: Object,
+      return {
+          db: {
+              type: Object,
               computed: '__computeDb(app)'
-      },
+          },
 
-      ref: {
-          type: Object,
+          ref: {
+              type: Object,
               computed: '__computeRef(db, path, disabled)',
               observer: '__refChanged'
-      },
+          },
 
-      /**
-       * Path to a Firebase root or endpoint. N.B. `path` is case sensitive.
-       * @type {string|null}
-       */
-      path: {
-          type: String,
+          /**
+           * Path to a Firebase root or endpoint. N.B. `path` is case sensitive.
+           * @type {string|null}
+           */
+          path: {
+              type: String,
               value: null,
               observer: '__pathChanged'
-      },
+          },
 
-      /**
-       * When true, Firebase listeners won't be activated. This can be useful
-       * in situations where elements are loaded into the DOM before they're
-       * ready to be activated (e.g. navigation, initialization scenarios).
-       */
-      disabled: {
-          type: Boolean,
+          /**
+           * When true, Firebase listeners won't be activated. This can be useful
+           * in situations where elements are loaded into the DOM before they're
+           * ready to be activated (e.g. navigation, initialization scenarios).
+           */
+          disabled: {
+              type: Boolean,
               value: false
-      },
+          },
 
-      /**
-       * Reference to the unsubscribe function for turning a listener off.
-       * @type {Function}
-       * @private
-       */
-      _unsubscribe: {
-          type: Object
-      }
+          /**
+           * Reference to the unsubscribe function for turning a listener off.
+           * @type {Function}
+           * @private
+           */
+          _unsubscribe: {
+              type: Object
+          }
+      };
   }
 
   static get observers() {
