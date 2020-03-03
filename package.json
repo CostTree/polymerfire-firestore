@@ -1,0 +1,19 @@
+{
+  "name": "polymerfire-firestore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "firebase-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CostTree/polymerfire-firestore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CostTree/polymerfire-firestore/issues"
+  },
+  "homepage": "https://github.com/CostTree/polymerfire-firestore#readme"
+}
