@@ -4,6 +4,7 @@ import '@firebase/database';
 import '@firebase/auth';
 import '@firebase/storage';
 import '@firebase/messaging';
+import '@firebase/firestore';
 
 import { PolymerElement } from '@polymer/polymer/polymer-element';
 
