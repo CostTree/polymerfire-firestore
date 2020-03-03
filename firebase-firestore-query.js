@@ -1,6 +1,6 @@
 import {FirebaseFirestoreCollectionMixin} from "./firebase-firestore-collection-mixin";
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element';
+import { PolymerElement } from '@polymer/polymer/polymer-element';
 
 class FirebaseFirestoreQuery extends FirebaseFirestoreCollectionMixin(PolymerElement) {
     constructor() {
@@ -128,6 +128,11 @@ class FirebaseFirestoreQuery extends FirebaseFirestoreCollectionMixin(PolymerEle
             __map: {
                 type: Object,
                 notify: true
+            },
+
+            whereOptions: {
+                type: Array,
+                value: ["<", "<=", "==", ">", ">=", "array-contains"]
             }
         };
     }
@@ -227,8 +232,11 @@ class FirebaseFirestoreQuery extends FirebaseFirestoreCollectionMixin(PolymerEle
      */
     __computeQuery(ref, orderBy, limit, startAt, startAfter, endAt, endBefore, where) {
         if (ref == null) {
+            console.log("ref is null");
             return null;
         }
+
+        console.log("ref is not null");
 
         var query = ref;
 
@@ -282,7 +290,7 @@ class FirebaseFirestoreQuery extends FirebaseFirestoreCollectionMixin(PolymerEle
                 where = this.__parseQueryParams(where);
             }
             where.forEach(function (eachWhere) {
-                if (eachWhere.length === 3 && whereOptions.indexOf(eachWhere[1]) != -1) {
+                if (eachWhere.length === 3 && this.whereOptions.indexOf(eachWhere[1]) != -1) {
                     query = query.where.apply(query, eachWhere);
                 }
             });

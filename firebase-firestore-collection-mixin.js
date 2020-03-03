@@ -1,7 +1,9 @@
-import '@polymer/app-storage/app-storage-behavior';
-import '../polymerfire/firebase-common-behavior';
+import {mixinBehaviors} from '@polymer/polymer/lib/legacy'
 
-export const FirebaseFirestoreCollectionMixin = (superClass) => class extends superClass {
+import {AppStorageBehavior} from '@polymer/app-storage/app-storage-behavior';
+import {FirebaseCommonBehavior} from '../polymerfire/firebase-common-behavior';
+
+export const FirebaseFirestoreCollectionMixin = (superClass) => class extends mixinBehaviors([AppStorageBehavior, FirebaseCommonBehavior], superClass) {
     constructor() {
         super();
     }
