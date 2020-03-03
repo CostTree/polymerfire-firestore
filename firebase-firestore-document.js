@@ -1,6 +1,8 @@
+import {FirebaseFirestoreDocumentMixin} from "./firebase-firestore-document-mixin";
+
 import { PolymerElement } from '@polymer/polymer/polymer-element';
 
-class FirebaseFirestoreDocument extends PolymerElement {
+class FirebaseFirestoreDocument extends FirebaseFirestoreDocumentMixin(PolymerElement) {
     constructor() {
         super();
     }
