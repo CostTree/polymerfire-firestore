@@ -1,4 +1,4 @@
-import {mixinBehaviors} from '@polymer/polymer/lib/legacy'
+import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class'
 
 import {AppStorageBehavior} from '@polymer/app-storage/app-storage-behavior';
 import {FirebaseCommonBehavior} from '../polymerfire/firebase-common-behavior';
