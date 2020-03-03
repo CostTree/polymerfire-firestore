@@ -1,4 +1,4 @@
-import '@polymer/app-storage/app-storage-behavior';
+import {AppStorageBehavior} from '@polymer/app-storage/app-storage-behavior';
 import '../polymerfire/firebase-common-behavior';
 
 export const FirebaseFirestoreDocumentMixin = (superClass) => class extends superClass {
@@ -98,7 +98,10 @@ export const FirebaseFirestoreDocumentMixin = (superClass) => class extends supe
     }
 
     __pathChanged(path, oldPath) {
-        if (!this.disabled && !this.valueIsEmpty(this.data)) {
+        console.log("inside firebase-firestore-document-mixin pathChanged function");
+        console.log("AppStorageBehavior:");
+        console.log(AppStorageBehavior);
+        if (!this.disabled && !AppStorageBehavior.valueIsEmpty(this.data)) {
             this.syncToMemory(function() {
                 this.data = this.zeroValue;
                 this.__needSetData = true;
